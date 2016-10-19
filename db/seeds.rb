@@ -46,35 +46,36 @@ puts 'Seeding the database...'
 
 
 {
-  company_name: 'Catarse',
-  company_logo: 'http://catarse.me/assets/catarse_bootstrap/logo_icon_catarse.png',
-  host: 'catarse.me',
-  base_url: "http://catarse.me",
-
-  email_contact: 'contato@catarse.me',
-  email_payments: 'financeiro@catarse.me',
-  email_projects: 'projetos@catarse.me',
-  email_system: 'system@catarse.me',
-  email_no_reply: 'no-reply@catarse.me',
-  facebook_url: "http://facebook.com/catarse.me",
-  facebook_app_id: '173747042661491',
-  twitter_url: 'http://twitter.com/catarse',
-  twitter_username: "catarse",
-  mailchimp_url: "http://catarse.us5.list-manage.com/subscribe/post?u=ebfcd0d16dbb0001a0bea3639&amp;id=149c39709e",
+  company_name: 'Nobleza Obliga',
+  company_logo: 'https://nobleza-obliga-upgrade.herokuapp.com/assets/catarse_bootstrap/logo_icon_catarse.png',
+  host: 'nobleza-obliga-upgrade.herokuapp.com',
+  base_url: "https://nobleza-obliga-upgrade.herokuapp.com",
+  jwt_secret: "b26ed3cb-9666-4eca-9182-3a87fb2c5c6d",
+  api_hos: "https://nobleza-obliga-upgrade.herokuapp.com",
+  email_contact: 'info@NoblezaObliga.com',
+  email_payments: 'pagos@NoblezaObliga.com',
+  email_projects: 'causas@NoblezaObliga.com',
+  email_system: 'info@NoblezaObliga.com',
+  email_no_reply: 'no-reply@NoblezaObliga.com',
+  facebook_url: "https://www.facebook.com/NoblezaO",
+  facebook_app_id: '',
+  twitter_url: 'https://twitter.com/NoblezaObliga_',
+  twitter_username: "NoblezaObliga_",
+  mailchimp_url: "",
   catarse_fee: '0.13',
-  support_forum: 'http://suporte.catarse.me/',
-  base_domain: 'catarse.me',
+  support_forum: 'https://nobleza-obliga-upgrade.herokuapp.com',
+  base_domain: 'nobleza-obliga-upgrade.herokuapp.com',
   uservoice_secret_gadget: 'change_this',
   uservoice_key: 'uservoice_key',
-  faq_url: 'http://suporte.catarse.me/',
-  feedback_url: 'http://suporte.catarse.me/forums/103171-catarse-ideias-gerais',
-  terms_url: 'http://suporte.catarse.me/knowledgebase/articles/161100-termos-de-uso',
-  privacy_url: 'http://suporte.catarse.me/knowledgebase/articles/161103-pol%C3%ADtica-de-privacidade',
-  about_channel_url: 'http://blog.catarse.me/conheca-os-canais-do-catarse/',
-  instagram_url: 'http://instagram.com/catarse_',
-  blog_url: "http://blog.catarse.me",
-  github_url: 'http://github.com/catarse',
-  contato_url: 'http://suporte.catarse.me/'
+  faq_url: 'https://nobleza-obliga-upgrade.herokuapp.com',
+  feedback_url: 'https://nobleza-obliga-upgrade.herokuapp.com',
+  terms_url: 'https://nobleza-obliga-upgrade.herokuapp.com',
+  privacy_url: 'https://nobleza-obliga-upgrade.herokuapp.com',
+  about_channel_url: 'https://nobleza-obliga-upgrade.herokuapp.com',
+  instagram_url: '',
+  blog_url: "https://nobleza-obliga-upgrade.herokuapp.com",
+  github_url: 'https://github.com/dikaoru/nobleza',
+  contato_url: 'https://nobleza-obliga-upgrade.herokuapp.com'
 }.each do |name, value|
    conf = CatarseSettings.find_or_initialize_by(name: name)
    conf.update_attributes({
@@ -112,6 +113,41 @@ CatarseSettings.all.each do |conf|
   a = conf.attributes
   puts "  #{a['name']}: #{a['value']}"
 end
+
+puts "Adding Admin user..."
+
+  User.find_or_create_by!(name: "Admin") do |u|
+    u.nickname = "Admin"
+    u.email = "admin@admin.com"
+    u.password = "password"
+    u.password_confirmation = "password"
+    u.remember_me = false
+    u.admin = true
+  end
+
+puts "Adding Funder user..."
+
+  User.find_or_create_by!(name: "Funder") do |u|
+    u.nickname = "Funder"
+    u.email = "funder@funder.com"
+    u.nickname = "Funder"
+    u.password = "password"
+    u.password_confirmation = "password"
+    u.remember_me = false
+  end
+
+puts "Adding Test user..."
+
+  User.find_or_create_by!(name: "Test") do |u|
+    u.nickname = "Test"
+    u.email = "test@test.com"
+    u.nickname = "Test"
+    u.password = "password"
+    u.password_confirmation = "password"
+    u.remember_me = false
+  end
+
+puts "Done!"
 
 Rails.cache.clear
 
