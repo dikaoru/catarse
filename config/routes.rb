@@ -20,6 +20,7 @@ Catarse::Application.routes.draw do
   end
 
 
+
   get '/amigos' => redirect('http://crowdfunding.catarse.me/amigos')
   get '/criadores' => redirect('http://crowdfunding.catarse.me/criadores')
   get '/paratodos' => redirect('http://crowdfunding.catarse.me/paratodos')
