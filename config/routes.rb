@@ -75,6 +75,7 @@ Catarse::Application.routes.draw do
       get :finish
     end
   end
+
   resources :projects, only: [ :create, :update, :edit, :new, :show] do
     resources :accounts, only: [:create, :update]
     resources :posts, controller: 'projects/posts', only: [ :destroy, :show ]
@@ -134,6 +135,23 @@ Catarse::Application.routes.draw do
     end
   end
 
+  resources :mercado_pago, :only => [:show] do
+    member do
+      get "project_auth"
+      get "project_auth_callback"
+      get "pay"
+    end
+  end
+
+    resources :paypal, :only => [] do
+    member do
+      get 'pay'
+      # get 'success'
+      # get 'cancel'
+    end
+  end
+
+  
   get "/terms-of-use" => 'high_voltage/pages#show', id: 'terms_of_use'
   get "/privacy-policy" => 'high_voltage/pages#show', id: 'privacy_policy'
   get "/start" => 'high_voltage/pages#show', id: 'start'

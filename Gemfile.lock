@@ -51,6 +51,11 @@ GEM
     activejob (4.2.7.1)
       activesupport (= 4.2.7.1)
       globalid (>= 0.3.0)
+    activemerchant (1.62.0)
+      activesupport (>= 3.2.14, < 5.1)
+      builder (>= 2.1.2, < 4.0.0)
+      i18n (>= 0.6.9)
+      nokogiri (~> 1.4)
     activemodel (4.2.7.1)
       activesupport (= 4.2.7.1)
       builder (~> 3.1)
@@ -636,6 +641,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activemerchant
   activerecord-nulldb-adapter
   auto_html (~> 1.6)
   best_in_place!
@@ -726,6 +732,9 @@ DEPENDENCIES
   video_info
   web-console
   zonebie
+
+RUBY VERSION
+   ruby 2.3.1p112
 
 BUNDLED WITH
    1.13.6

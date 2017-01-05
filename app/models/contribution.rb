@@ -180,4 +180,23 @@ class Contribution < ActiveRecord::Base
     contribution_attributes.to_json
   end
 
+  def as_mercado_pago_params(options = {})
+    {  
+      "items" => [
+        {
+          "id" => self.id,
+          "title" => "#{project.name}",
+          "quantity" => 1,
+          "unit_price" => value.to_f,
+          "currency_id" => MercadoPagoApi.currency_code,
+          "picture_url" => project.display_image
+        }],
+        "payer" => { "name" => user.display_name, "email" => user.email },
+        "external_reference" => "mp-#{project.id}-#{self.id}",
+        "installments" => 1,
+        "marketplace_fee" => (value * (MercadoPagoApi.saguaro_percent + MercadoPagoApi.owner_percent)).round(2).to_f,
+        "mp-mode" => "modal"
+      }
+  end  
+
 end

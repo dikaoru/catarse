@@ -31,18 +31,19 @@ module Project::BaseValidator
       end
 
       wo.validates_presence_of :budget
-      wo.validates_presence_of :account, message: 'Dados Bancários não podem ficar em branco'		
+      # wo.validates_presence_of :account, message: 'Dados Bancários não podem ficar em branco'		
 
       wo.validate do
         if self.online_days.present? && self.rewards.where("date_trunc('month',deliver_at) < ?", self.expires_at.present? ? expires_at.beginning_of_month : (Time.now.utc + self.online_days.days).beginning_of_month).present?
           self.errors['rewards.deliver_at'] << "Existe uma ou mais recompensas com o prazo de entrega menor que a data do fim do projeto"
         end
       end
-      wo.validate do
-        if self.account && (self.account.agency.try(:size) || 0) < 4
-          self.errors['account.agency_size'] << "Agência deve ter pelo menos 4 dígitos"
-        end
-      end
+      # wo.validate do
+      #   if self.account && (self.account.agency.try(:size) || 0) < 4
+      #     self.errors['account.agency_size'] << "Agência deve ter pelo menos 4 dígitos"
+      #   end
+        
+      # end
     end
   end
 end
