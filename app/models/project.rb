@@ -184,7 +184,7 @@ class Project < ActiveRecord::Base
 
   validates_acceptance_of :accepted_terms, on: :create
   ##validation for all states
-  validates_presence_of :name, :user, :category, :service_fee
+  validates_presence_of :name, :user, :category, :service_fee, :mercado_pago_refresh_token
   validates_length_of :headline, maximum: HEADLINE_MAXLENGTH
   validates_numericality_of :online_days, less_than_or_equal_to: 60, greater_than_or_equal_to: 1,
     if: ->(p){ !p.is_flexible? && p.online_days.present? && ( p.online_days_was.nil? || p.online_days_was <= 60 ) }
